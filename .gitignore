@@ -1,0 +1,15 @@
+/.editorconfig
+/.env
+/.env.example
+/.styleci.yml
+/artisan
+/composer.lock
+/package-lock.json
+/phpunit.xml
+/README.md
+/server.php
+/webpack.mix.js
+/bootstrap
+/storage
+/tests
+/vendor

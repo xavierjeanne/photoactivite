@@ -9,7 +9,7 @@
 /README.md
 /server.php
 /webpack.mix.js
-/bootstrap
-/storage
 /tests
 /vendor
+/node_modules
+/.vscode-upload.json

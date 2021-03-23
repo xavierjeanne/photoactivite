@@ -10,4 +10,11 @@ class Photo extends Model
         'name', 'extension'
     ];
 
+    public function users(){
+        return $this->belongsToMany('App\Models\User');
+    }
+
+    public function categories(){
+        return $this->belongsToMany('App\Models\Category');
+    }
 }

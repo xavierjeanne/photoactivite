@@ -14,4 +14,8 @@ class Avatar extends Model
     protected $fillable = [
         'name','file'
     ];
+
+    public function users(){
+        return $this->hasMany('App\Models\User');
+    }
 }

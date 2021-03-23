@@ -12,6 +12,10 @@ class Session extends Model
      * @var array
      */
     protected $dates = [
-        'dpen','close',
+        'open','close',
     ];
+
+    public function users(){
+        return $this->hasMany('App\Models\User');
+    }
 }

@@ -18,7 +18,7 @@ class CreateLicencesTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('price');
-            $table->string('periodicty');
+            $table->string('periodicity');
             $table->timestamps();
         });
     }

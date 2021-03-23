@@ -14,4 +14,16 @@ class Category extends Model
     protected $fillable = [
         'name','code'
     ];
+
+     public function activities(){
+        return $this->belongsToMany('App\Models\Activity');
+    }
+
+    public function users(){
+        return $this->belongsToMany('App\Models\User');
+    }
+
+    public function categories(){
+        return $this->belongsToMany('App\Models\Category');
+    }
 }

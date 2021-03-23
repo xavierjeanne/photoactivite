@@ -36,6 +36,6 @@ class CreateLicenceFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('licence_activities');
+        Schema::dropIfExists('licence_fields');
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+
+use App\Models\Role;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -36,4 +38,33 @@ class User extends Authenticatable
     protected $dates = [
         'dateofbirth','email_verified_at'
     ];
+
+    public function role(){
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function avatar(){
+        return $this->belongsTo('App\Models\Avatar');
+    }
+
+    public function licences(){
+        return $this->belongsToMany('App\Models\Licence');
+    }
+
+    public function photoCategories(){
+        return $this->belongsToMany('App\Models\PhotoCategory');
+    }
+
+    public function photoFavorites(){
+        return $this->belongsToMany('App\Models\Photo');
+    }
+
+    public function activities(){
+        return $this->belongsToMany('App\Models\Activity');
+    }
+
+    public function session(){
+        return $this->hasOne('App\Models\Session');
+    }
+
 }

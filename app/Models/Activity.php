@@ -14,4 +14,17 @@ class Activity extends Model
     protected $fillable = [
         'name','description'
     ];
+
+    public function fields(){
+        return $this->belongsToMany('App\Models\Field');
+    }
+
+     public function categories(){
+        return $this->belongsToMany('App\Models\Category');
+    }
+
+    public function users(){
+        return $this->belongsToMany('App\Models\User');
+    }
+    
 }

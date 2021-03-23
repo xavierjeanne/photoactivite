@@ -14,4 +14,12 @@ class Field extends Model
     protected $fillable = [
         'name','description'
     ];
+
+    public function activities(){
+        return $this->belongsToMany('App\Models\Activity');
+    }
+
+    public function licences(){
+        return $this->belongsToMany('App\Models\Licence');
+    }
 }

@@ -12,6 +12,10 @@ class Role extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
     ];
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }

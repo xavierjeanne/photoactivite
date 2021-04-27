@@ -16,7 +16,7 @@ class Admin
     public function handle($request, Closure $next)
     {
         $user = $request->user();
-        if ($user && ($user->role == 'administrator' || $user->role == 'customer')) {
+        if ($user && ($user->role->name == 'administrator' || $user->role->name == 'customer')) {
             return $next($request);
         }
         return redirect()->route('home');

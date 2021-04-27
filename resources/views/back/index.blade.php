@@ -1,4 +1,4 @@
 @extends('back.layout')
-@section('main')
-C'est ma page d'accueil !
+@section('content')
+C'est ma page d'admin !
 @endsection

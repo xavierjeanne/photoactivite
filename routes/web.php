@@ -14,12 +14,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/**
+ * pages du site acccéssible à tous
+ */
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/pro','ProController@index')->name('pro');
+Route::get('/perso','ProController@index')->name('perso');
+Route::get('/contact','ContactController@index')->name('contact');
+Route::get('/mentions','MentionController@index')->name('mentions');
+Route::get('/policy','PolicyController@index')->name('policy');
 
+/**
+ * back office
+ */
 Route::get('/admin','Back\AdminController@index')->name('admin')->middleware('admin');
+
+/**
+* Page accéssible aux utilisateurs authentifié
+ */
+Route::middleware('auth')->group(function () {
+    Route::get('/licence', 'LicenceController@form')->name('licence');
+
+});

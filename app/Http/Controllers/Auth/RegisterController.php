@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,11 +49,20 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            return Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'lastname' => ['required', 'string', 'max:255'],
+                'address' => ['required', 'string', 'max:255'],
+                'postal-code' => ['required', 'string'],
+                'city' => ['required', 'string'],
+                'country' => ['required', 'string'],
+                'dateofbirth' => ['required', 'date'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+                'company' => 'required_if:type,pro',
+                'phone' => 'required_if:type,pro',
+                'siret' => 'required_if:type,pro',
+            ]);
     }
 
     /**
@@ -66,8 +75,27 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'lastname' => $data['name'],
             'email' => $data['email'],
+            'address' => $data['address'],
+            'address-bis' => $data['address-bis'],
+            'postal-code' => $data['postal-code'],
+            'country' => $data['country'],
+            'city' => $data['city'],
+            'siret' => $data['siret'],
+            'company' => $data['company'],
+            'phone' => $data['phone'],
+            'dateofbirth' => $data['dateofbirth'],
             'password' => Hash::make($data['password']),
+            'parent_id' => 0,
+            'licence_active_id' => 0,
+            'avatar_id' => 1,
+            'role_id' => 2,
         ]);
+    }
+
+    public function showRegistrationFormStep2($type)
+    {
+        return view('auth.register-step2',compact('type'));
     }
 }

@@ -17,7 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Auth::routes();
-
+/**
+ * Overridde route
+ */
+Route::get('register/{type}', [
+  'as' => 'register-step2',
+  'uses' => 'Auth\RegisterController@showRegistrationFormStep2'
+]);
 /**
  * pages du site acccéssible à tous
  */

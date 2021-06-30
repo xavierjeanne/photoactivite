@@ -11,7 +11,7 @@
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
                         <input type="hidden" name="type" value={{$type}}>
-
+                        
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nom') }}</label>
                             <div class="col-md-6">
@@ -48,7 +48,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        @if($type === 'pro')
                         <div class="form-group row">
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Adresse') }}</label>
                             <div class="col-md-6">
@@ -112,7 +112,7 @@
                                 @enderror
                             </div>
                         </div>
-
+                        @endif
                         <div class="form-group row">
                             <label for="dateofbirth" class="col-md-4 col-form-label text-md-right">{{ __('Date de naissance') }}</label>
                             <div class="col-md-6">
@@ -139,11 +139,16 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmer le mot de passe') }}</label>
                         
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required
                                     autocomplete="new-password">
+                                    @error('password_confirmation')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
                         </div>
 

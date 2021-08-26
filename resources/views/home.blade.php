@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    {{dd($homeContents)}}
     <div class="row justify-content-center main-header">
         <div class="col-12">
             <h1>Photo et activités agréables adaptées à des usages professionnel et personnel</h1>

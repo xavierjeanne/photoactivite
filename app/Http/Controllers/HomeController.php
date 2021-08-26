@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,6 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $home = Page::where('title', 'home')->first();
+        $homeContents = $home->contents()->get();
+        return view('home')->with('homeContents',$homeContents);
     }
 }

@@ -15,12 +15,12 @@ class CreateUserPhotoCategoriesTable extends Migration
     {
         Schema::create('user_photo_categories', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->integer('category_id');
+            $table->integer('category_id')->unsigned()->index();
             $table->foreign('category_id')->references('id')
                 ->on('categories')
                 ->onDelete('restrict')

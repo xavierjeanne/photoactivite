@@ -15,7 +15,7 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->id();
-            $table->integer('page_id');
+            $table->integer('page_id')->unsigned()->index();
             $table->foreign('page_id')->references('id')
                 ->on('pages')
                 ->onDelete('restrict')

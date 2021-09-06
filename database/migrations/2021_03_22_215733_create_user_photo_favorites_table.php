@@ -16,12 +16,12 @@ class CreateUserPhotoFavoritesTable extends Migration
         Schema::create('user_photo_favorites', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->integer('user_id');
+            $table->integer('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->integer('photo_id');
+            $table->integer('photo_id')->unsigned()->index();
             $table->foreign('photo_id')->references('id')
                 ->on('photos')
                 ->onDelete('restrict')

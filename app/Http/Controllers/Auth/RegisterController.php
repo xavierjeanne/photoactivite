@@ -54,16 +54,16 @@ class RegisterController extends Controller
             return Validator::make($data, [
                 'name' => ['required', 'string', 'max:255'],
                 'lastname' => ['required', 'string', 'max:255'],
-                'address' => ['required_if:type,pro', 'string', 'max:255'],
+                /*'address' => ['required_if:type,pro', 'string', 'max:255'],
                 'postal-code' => ['required_if:type,pro', 'string'],
                 'city' => ['required_if:type,pro', 'string'],
                 'country' => ['required_if:type,pro', 'string'],
-                'dateofbirth' => ['required', 'date'],
+                'dateofbirth' => ['required', 'date'],*/
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
-                'company' => 'required_if:type,pro',
+                /*'company' => 'required_if:type,pro',
                 'phone' => 'required_if:type,pro',
-                'siret' => 'required_if:type,pro',
+                'siret' => 'required_if:type,pro',*/
             ]);
     }
 
@@ -75,46 +75,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if($data['type']=='perso'){
+        //if($data['type']=='perso'){
             return User::create([
                 'name' => $data['name'],
                 'lastname' => $data['name'],
                 'email' => $data['email'],
-                'dateofbirth' => $data['dateofbirth'],
                 'password' => Hash::make($data['password']),
                 'parent_id' => 0,
-                'licence_active_id' => 0,
+                'licence_active_id' => 1,
                 'avatar_id' => 1,
                 'role_id' => 2,
             ]);
-        }
+       /* }
         else{
             return User::create([
                 'name' => $data['name'],
                 'lastname' => $data['name'],
                 'email' => $data['email'],
-                'address' => $data['address'],
-                'address-bis' => $data['address-bis'],
-                'postal-code' => $data['postal-code'],
-                'country' => $data['country'],
-                'city' => $data['city'],
-                'siret' => $data['siret'],
-                'company' => $data['company'],
-                'phone' => $data['phone'],
-                'dateofbirth' => $data['dateofbirth'],
                 'password' => Hash::make($data['password']),
                 'parent_id' => 0,
                 'licence_active_id' => 0,
                 'avatar_id' => 1,
                 'role_id' => 2,
             ]);
-        }
+        }*/
     }
 
-    public function showRegistrationFormStep2($type)
+    /*public function showRegistrationFormStep2($type)
     {
         return view('auth.register-step2',compact('type'));
-    }
+    }*/
 
     public function register(Request $request)
     {
@@ -126,6 +116,6 @@ class RegisterController extends Controller
         $this->guard()->login($user);
 
 
-    return redirect(route('home'));
+    return redirect(route('admin'));
     }
 }

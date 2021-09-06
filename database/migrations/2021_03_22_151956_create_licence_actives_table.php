@@ -17,6 +17,16 @@ class CreateLicenceActivesTable extends Migration
             $table->id()->unsigned();
             $table->timestamps();
             $table->boolean('active');
+            $table->integer('licence_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
+            $table->foreign('licence_id')->references('id')
+                ->on('licences')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
+            $table->foreign('user_id')->references('id')
+                ->on('users')
+                ->onDelete('restrict')
+                ->onUpdate('restrict');
         });
     }
 

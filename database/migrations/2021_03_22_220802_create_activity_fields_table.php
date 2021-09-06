@@ -15,12 +15,12 @@ class CreateActivityFieldsTable extends Migration
     {
         Schema::create('activity_fields', function (Blueprint $table) {
             $table->id();
-            $table->integer('activity_id');
+            $table->integer('activity_id')->unsigned()->index();
             $table->foreign('activity_id')->references('id')
                 ->on('activities')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->integer('field_id');
+            $table->integer('field_id')->unsigned()->index();
             $table->foreign('field_id')->references('id')
                 ->on('fields')
                 ->onDelete('restrict')

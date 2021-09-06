@@ -15,12 +15,12 @@ class CreateLicenceFieldsTable extends Migration
     {
         Schema::create('licence_fields', function (Blueprint $table) {
             $table->id();
-            $table->integer('field_id');
+            $table->integer('field_id')->unsigned()->index();
             $table->foreign('field_id')->references('id')
                 ->on('fields')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
-            $table->integer('licence_id');
+            $table->integer('licence_id')->unsigned()->index();
             $table->foreign('licence_id')->references('id')
                 ->on('licences')
                 ->onDelete('restrict')

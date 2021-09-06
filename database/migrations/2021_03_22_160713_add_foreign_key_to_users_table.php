@@ -14,10 +14,10 @@ class AddForeignKeyToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('licence_active_id');
-            $table->integer('avatar_id');
-            $table->integer('parent_id');
-            $table->integer('role_id');
+            $table->integer('licence_active_id')->unsigned()->index();
+            $table->integer('avatar_id')->unsigned()->index();
+            $table->integer('parent_id')->unsigned()->index();
+            $table->integer('role_id')->unsigned()->index();
             $table->foreign('licence_active_id')->references('id')
                 ->on('licence_actives')
                 ->onDelete('restrict')

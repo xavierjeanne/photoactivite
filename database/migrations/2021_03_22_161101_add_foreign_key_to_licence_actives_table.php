@@ -14,8 +14,8 @@ class AddForeignKeyToLicenceActivesTable extends Migration
     public function up()
     {
         Schema::table('licence_actives', function (Blueprint $table) {
-            $table->integer('licence_id');
-            $table->integer('user_id');
+            $table->integer('licence_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned()->index();
             $table->foreign('licence_id')->references('id')
                 ->on('licences')
                 ->onDelete('restrict')

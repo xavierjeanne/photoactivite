@@ -14,7 +14,7 @@ class CreateFieldsTable extends Migration
     public function up()
     {
         Schema::create('fields', function (Blueprint $table) {
-            $table->increments()->unsigned();
+            $table->increments('id')->unsigned();
             $table->string('name');
             $table->string('description');
             $table->timestamps();

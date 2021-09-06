@@ -14,7 +14,7 @@ class CreateAvatarsTable extends Migration
     public function up()
     {
         Schema::create('avatars', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->string('name');
             $table->string('file');
             $table->timestamps();

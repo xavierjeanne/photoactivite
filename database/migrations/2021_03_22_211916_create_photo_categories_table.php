@@ -14,7 +14,7 @@ class CreatePhotoCategoriesTable extends Migration
     public function up()
     {
         Schema::create('photo_categories', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->integer('photo_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
             $table->foreign('photo_id')->references('id')

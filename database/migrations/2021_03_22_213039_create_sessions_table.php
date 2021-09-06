@@ -14,7 +14,7 @@ class CreateSessionsTable extends Migration
     public function up()
     {
         Schema::create('sessions', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->increments()->unsigned();
             $table->timestamp('open')->nullable();
             $table->timestamp('close')->nullable();
             $table->integer('user_id')->unsigned()->index();

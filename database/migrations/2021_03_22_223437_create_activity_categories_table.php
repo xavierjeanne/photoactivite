@@ -14,7 +14,7 @@ class CreateActivityCategoriesTable extends Migration
     public function up()
     {
         Schema::create('activity_categories', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->increments()->unsigned();
             $table->integer('category_photo_id')->unsigned()->index();
             $table->foreign('category_photo_id')->references('id')
                 ->on('photo_categories')

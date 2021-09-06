@@ -14,7 +14,7 @@ class CreateContentsTable extends Migration
     public function up()
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->increments()->unsigned();
             $table->integer('page_id')->unsigned()->index();
             $table->foreign('page_id')->references('id')
                 ->on('pages')

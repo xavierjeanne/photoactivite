@@ -14,7 +14,7 @@ class CreateActivityFieldsTable extends Migration
     public function up()
     {
         Schema::create('activity_fields', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->integer('activity_id')->unsigned()->index();
             $table->foreign('activity_id')->references('id')
                 ->on('activities')

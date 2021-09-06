@@ -14,7 +14,7 @@ class CreateLicenceActivesTable extends Migration
     public function up()
     {
         Schema::create('licence_actives', function (Blueprint $table) {
-            $table->id();
+            $table->id()->unsigned();
             $table->timestamps();
             $table->boolean('active');
         });

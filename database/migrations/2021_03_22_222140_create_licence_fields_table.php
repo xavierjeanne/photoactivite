@@ -14,7 +14,7 @@ class CreateLicenceFieldsTable extends Migration
     public function up()
     {
         Schema::create('licence_fields', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->increments()->unsigned();
             $table->integer('field_id')->unsigned()->index();
             $table->foreign('field_id')->references('id')
                 ->on('fields')

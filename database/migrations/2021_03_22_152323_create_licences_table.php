@@ -14,7 +14,7 @@ class CreateLicencesTable extends Migration
     public function up()
     {
         Schema::create('licences', function (Blueprint $table) {
-            $table->id()->unsigned();
+            $table->increments()->unsigned();
             $table->string('name');
             $table->text('description');
             $table->integer('price');

@@ -21,8 +21,8 @@ class CreateLicenceActivesTable extends Migration
             $table->integer('user_id')->unsigned()->index();
             $table->foreign('licence_id')->references('id')
                 ->on('licences')
-                ->onDelete('restrict')
-                ->onUpdate('restrict');
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->foreign('user_id')->references('id')
                 ->on('users')
                 ->onDelete('restrict')

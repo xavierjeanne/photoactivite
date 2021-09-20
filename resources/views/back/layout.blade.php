@@ -31,42 +31,34 @@
   <!-- Sidebar -->
   <nav id="sidebar">
     <div class="sidebar-header">
-      <h3>Bootstrap Sidebar</h3>
+      <h3><a href="{{url('/')}}">Photoactivite</a></h3>
     </div>
 
     <ul class="list-unstyled components">
-      <p>Dummy Heading</p>
       <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Parametres</a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
           <li>
-            <a href="#">Home 1</a>
+            <a href="{{ url('/admin/informations-personnelles') }}">Informations personnelles</a>
           </li>
           <li>
-            <a href="#">Home 2</a>
+            <a href="#">Informations de paiement</a>
           </li>
           <li>
-            <a href="#">Home 3</a>
+            <a href="#">Préférences</a>
           </li>
         </ul>
       </li>
-      <li>
-        <a href="#">About</a>
-      </li>
+      @if(\Auth::user()->role->name==='administrator')
       <li>
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
           <li>
-            <a href="#">Page 1</a>
-          </li>
-          <li>
-            <a href="#">Page 2</a>
-          </li>
-          <li>
-            <a href="#">Page 3</a>
+            <a href="{{url('/admin/page/list')}}">Gestion des pages</a>
           </li>
         </ul>
       </li>
+      @endif
       <li>
         <a href="#">Portfolio</a>
       </li>

@@ -38,7 +38,9 @@ Route::get('/policy','PolicyController@index')->name('policy');
  * back office
  */
 Route::get('/admin','Back\AdminController@index')->name('admin')->middleware('admin');
-
+Route::get('/admin/informations-personnelles','Back\UserController@informationPersonnelles')->name('admin.informations-personnelles')->middleware('admin');
+Route::post('/admin/user/save','Back\UserController@save')->name('admin.user.save')->middleware('admin');
+Route::get('/admin/page/list','Back\PageController@list')->name('admin.page.list')->middleware('admin');
 /**
 * Page accéssible aux utilisateurs authentifié
  */

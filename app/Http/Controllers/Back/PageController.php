@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Back;
 
-use App\Http\Controllers\Controller;
+use App\Models\Page;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PageController extends Controller
 {
     public function list(){
-        return view('back.page.list');
+        $pages = Page::all();
+        return view('back.page.list',compact('pages'));
     }
 }

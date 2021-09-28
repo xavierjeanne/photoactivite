@@ -37,10 +37,27 @@ Route::get('/policy','PolicyController@index')->name('policy');
 /**
  * back office
  */
-Route::get('/admin','Back\AdminController@index')->name('admin')->middleware('admin');
-Route::get('/admin/informations-personnelles','Back\UserController@informationPersonnelles')->name('admin.informations-personnelles')->middleware('admin');
-Route::post('/admin/user/save','Back\UserController@save')->name('admin.user.save')->middleware('admin');
-Route::get('/admin/page/list','Back\PageController@list')->name('admin.page.list')->middleware('admin');
+Route::group(['middleware' => 'admin',], function() {
+    Route::get('/admin', 'Back\AdminController@index')->name('admin');
+    Route::get('/admin/informations-personnelles', 'Back\UserController@informationPersonnelles')->name('admin.informations-personnelles');
+    Route::post('/admin/user/save', 'Back\UserController@save')->name('admin.user.save');
+    /**page admin */
+    Route::get('/admin/page/list', 'Back\PageController@list')->name('admin.page.list');
+    Route::get('/admin/page/new', 'Back\PageController@form')->name('admin.page.new');
+    Route::get('/admin/page/edit/{id}', array(
+        'as' => 'admin.page.edit',
+        'uses' => 'Admin\Page\PageController@form'
+    ));
+    Route::get('/admin/page/delete/{id}', array(
+        'as' => 'admin.page.delete',
+        'uses' => 'Admin\Page\PageController@delete'
+    ));
+    Route::delete('/admin/page/delete/{id}', array(
+        'as' => 'admin.page.delete',
+        'uses' => 'Admin\Page\PageController@delete'
+    ));
+});
+/**fin de page */
 /**
 * Page accéssible aux utilisateurs authentifié
  */

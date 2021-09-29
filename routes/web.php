@@ -46,15 +46,15 @@ Route::group(['middleware' => 'admin',], function() {
     Route::get('/admin/page/new', 'Back\PageController@form')->name('admin.page.new');
     Route::get('/admin/page/edit/{id}', array(
         'as' => 'admin.page.edit',
-        'uses' => 'Admin\Page\PageController@form'
+        'uses' => 'Back\PageController@form'
     ));
     Route::get('/admin/page/delete/{id}', array(
         'as' => 'admin.page.delete',
-        'uses' => 'Admin\Page\PageController@delete'
+        'uses' => 'Back\PageController@delete'
     ));
     Route::delete('/admin/page/delete/{id}', array(
         'as' => 'admin.page.delete',
-        'uses' => 'Admin\Page\PageController@delete'
+        'uses' => 'Back\PageController@delete'
     ));
 });
 /**fin de page */

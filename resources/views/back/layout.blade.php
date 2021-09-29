@@ -32,7 +32,7 @@
   <!-- Sidebar -->
   <nav id="sidebar">
     <div class="sidebar-header">
-      <h3><a href="{{url('/')}}">Photoactivite</a></h3>
+      <h3><a href="{{url('/')}}">Photoressource</a></h3>
     </div>
 
     <ul class="list-unstyled components">

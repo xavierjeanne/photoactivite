@@ -1,4 +1,3 @@
-@extends('layouts.modal')
 @section('before')
 <form method="delete" data-method="delete" action="{{ route("admin.page.delete", ['id' => $page->id]) }}"
     class="container ajax-form">

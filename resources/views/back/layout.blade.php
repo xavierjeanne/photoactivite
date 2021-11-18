@@ -11,7 +11,7 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  
 
   <!-- Fonts -->
   <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -24,7 +24,7 @@
   <!-- Scrollbar Custom CSS -->
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
  
 </head>
 
@@ -56,7 +56,7 @@
         <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
         <ul class="collapse list-unstyled" id="pageSubmenu">
           <li>
-            <a href="{{url('/pages')}}">Gestion des pages</a>
+            <a href="{{url('/admin/page/list')}}">Gestion des pages</a>
           </li>
         </ul>
       </li>
@@ -86,6 +86,8 @@
   </div>
 </div>
 <!-- jQuery Custom Scroller CDN -->
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>

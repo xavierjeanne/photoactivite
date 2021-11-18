@@ -2,30 +2,16 @@
 
 namespace App\Http\Controllers\Back;
 
+use DataTables;
 use App\Models\Page;
 use Illuminate\Http\Request;
+use Response;
 use App\Http\Controllers\Controller;
-use Datatables;
 
 class PageController extends Controller
 {
     public function index(Request $request){
-        if ($request->ajax()) {
-                $pages = Page::all();
-                return Datatables::of($pages)
-                        ->addIndexColumn()
-                        ->addColumn('action', function($row){
-    
-                            $btn = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Edit" class="edit btn btn-primary btn-sm editPage">Edit</a>';
-    
-                            $btn = $btn.' <a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$row->id.'" data-original-title="Delete" class="btn btn-danger btn-sm deletePage">Delete</a>';
-        
-                                return $btn;
-                        })
-                        ->rawColumns(['action'])
-                        ->make(true);
-            }
-        
+        $pages = Page::all();
         return view('back.page.list',compact('pages'));
     }
 
@@ -35,12 +21,19 @@ class PageController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function new(Request $request)
     {
-        Page::updateOrCreate(['id' => $request->product_id],
-                ['title' => $request->title, 'slug' => $request->slug]);        
-   
-        return response()->json(['success'=>'La page à été bien mise à jour.']);
+        $messages = [
+          'required' => 'Ce champ est obligatoire',
+          'unique'    => 'Ce nom est dèjà pris dans la base',
+        ];
+
+        $data= $request->validate([
+            'title'=>'required|unique:pages',
+            'slug'=>'required|unique:pages',
+        ], $messages);       
+        $page = Page::create($data);
+        return response()->json($page);
     }
 
      /**
@@ -49,9 +42,19 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         $page = Page::find($id);
+        $messages = [
+          'required' => 'Ce champ est obligatoire',
+          'unique'    => 'Ce nom est dèjà pris dans la base',
+        ];
+
+        $data= $request->validate([
+            'title'=>'required|unique:pages',
+            'slug'=>'required|unique:pages',
+        ], $messages);
+        $page::update($data);
         return response()->json($page);
     }
 
@@ -59,11 +62,11 @@ class PageController extends Controller
      *  delete page
      * @return View
      */
-    public function destroy( $id = false)
+    public function delete( $id = false)
     {
 
-        Page::find($id)->delete();
-     
+        $page = Page::find($id);
+        $page->delete();
         return response()->json(['success'=>'Page effacée avec succès.']);
         
     }

@@ -42,7 +42,20 @@ Route::group(['middleware' => 'admin',], function() {
     Route::get('/admin/informations-personnelles', 'Back\UserController@informationPersonnelles')->name('admin.informations-personnelles');
     Route::post('/admin/user/save', 'Back\UserController@save')->name('admin.user.save');
     /**page admin */
-    Route::resource('pages','Back\PageController');
+    Route::get('/admin/page/list', 'Back\PageController@index')->name('admin.page.list');
+    Route::post('/admin/page/new', 'Back\PageController@new')->name('admin.page.new');
+    Route::get('/admin/page/edit/{id}', array(
+        'as' => 'admin.page.edit',
+        'uses' => 'Back\PageController@form'
+    ));
+    Route::get('/admin/page/delete/{id}', array(
+        'as' => 'admin.page.delete',
+        'uses' => 'Back\PageController@delete'
+    ));
+    Route::delete('/admin/page/delete/{id}', array(
+        'as' => 'admin.page.delete',
+        'uses' => 'Back\PageController@delete'
+    ));
 });
 /**fin de page */
 /**

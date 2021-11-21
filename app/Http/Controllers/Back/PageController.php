@@ -27,12 +27,23 @@ class PageController extends Controller
           'required' => 'Ce champ est obligatoire',
           'unique'    => 'Ce nom est dèjà pris dans la base',
         ];
-
-        $data= $request->validate([
-            'title'=>'required|unique:pages',
-            'slug'=>'required|unique:pages',
-        ], $messages);       
-        $page = Page::create($data);
+        if(isset($request->id) && !is_null($request->id)){
+            $page = Page::find($request->id);
+            $data= $request->validate([
+                'title'=>'required|unique:pages,title,'.$page->id.'',
+                'slug'=>'required|unique:pages,slug,'.$page->id.'',
+            ], $messages);
+            $page->title = $request->title;
+            $page->slug = $request->slug;
+            $page->save();
+        }
+        else{
+            $data= $request->validate([
+                'title'=>'required|unique:pages',
+                'slug'=>'required|unique:pages',
+            ], $messages);       
+            $page = Page::create($data);
+        }
         return response()->json($page);
     }
 
@@ -42,20 +53,11 @@ class PageController extends Controller
      * @param  \App\Page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit($id)
     {
-        $page = Page::find($id);
-        $messages = [
-          'required' => 'Ce champ est obligatoire',
-          'unique'    => 'Ce nom est dèjà pris dans la base',
-        ];
-
-        $data= $request->validate([
-            'title'=>'required|unique:pages',
-            'slug'=>'required|unique:pages',
-        ], $messages);
-        $page::update($data);
-        return response()->json($page);
+        $page_edit = Page::find($id);
+    
+        return response()->json($page_edit);
     }
 
      /**
@@ -69,5 +71,11 @@ class PageController extends Controller
         $page->delete();
         return response()->json(['success'=>'Page effacée avec succès.']);
         
+    }
+
+    public function listContent($id = false){
+        $page = Page::find($id);
+        $contents = $page->contents();
+        var_dump($contents);
     }
 }

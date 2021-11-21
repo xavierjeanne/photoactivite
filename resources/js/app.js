@@ -14,8 +14,40 @@ jQuery(document).ready(function($) {
     jQuery('#btn-add').click(function() {
         jQuery('#btn-save').val("add");
         jQuery('#myForm').trigger("reset");
+        jQuery('#formModalLabel').text('Créer une nouvelle page');
         jQuery('#formModal').modal('show');
     });
+    jQuery('.btn-details').click(function() {
+        jQuery('#myFormBlock #btn-save').val("add");
+        jQuery('#myFormBlock').trigger("reset");
+        jQuery('#formModalBlockLabel').text('Créer un nouvelle block');
+        jQuery('#formModalBlock').modal('show');
+    });
+
+    // open modal for edit page //
+    jQuery('.btn-edit').click(function() {
+        var id = $(this).data('id');
+        jQuery('#myForm').trigger("reset");
+        jQuery('#formModalLabel').text('Editer la page');
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: 'edit/' + id,
+            dataType: 'json',
+            success: function(data) {
+                $("<input type='hidden' id='id' value='" + data.id + "' />").attr("name", "id").appendTo("#myForm");
+                jQuery('#formModal input[name="slug"]').val(data.slug);
+                jQuery('#formModal input[name="title"]').val(data.title);
+                jQuery('#formModal').modal('show');
+            }
+        });
+    });
+
     //delete alert danger 
     $("#formModal input").focus(function() {
         $(".text-danger").html('');
@@ -31,6 +63,7 @@ jQuery(document).ready(function($) {
         var formData = {
             title: jQuery('#title').val(),
             slug: jQuery('#slug').val(),
+            id: jQuery('#id').val(),
         };
         var state = jQuery('#btn-save').val();
         var type = "POST";
@@ -49,6 +82,7 @@ jQuery(document).ready(function($) {
                     jQuery("#page" + page_id).replaceWith(page);
                 }
                 jQuery('#myForm').trigger("reset");
+                $(".text-danger").html('');
                 jQuery('#formModal').modal('hide');
                 location.reload(true);
             },

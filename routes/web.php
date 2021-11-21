@@ -43,10 +43,11 @@ Route::group(['middleware' => 'admin',], function() {
     Route::post('/admin/user/save', 'Back\UserController@save')->name('admin.user.save');
     /**page admin */
     Route::get('/admin/page/list', 'Back\PageController@index')->name('admin.page.list');
+    Route::get('/admin/page/content', 'Back\PageController@listContent/{id}')->name('admin.page.list.content');
     Route::post('/admin/page/new', 'Back\PageController@new')->name('admin.page.new');
     Route::get('/admin/page/edit/{id}', array(
         'as' => 'admin.page.edit',
-        'uses' => 'Back\PageController@form'
+        'uses' => 'Back\PageController@edit'
     ));
     Route::get('/admin/page/delete/{id}', array(
         'as' => 'admin.page.delete',

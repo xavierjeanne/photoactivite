@@ -17,6 +17,7 @@
                     <td>{{$page->title}}</td>
                     <td>{{$page->slug}}</td>
                     <td><button class="btn-edit" data-id="{{$page->id}}"><i class="fa fa-pen" title="{{ __(" Éditer") }}"></i></button>
+                        <button class="btn-details" data-id="{{$page->id}}"><i class="fas fa-align-justify" title="{{ __(" Détail") }}"></i></button>
                         <button class="btn-suppr" data-id="{{$page->id}}"><i class="fa fa-trash" title="{{ __(" Supprimer") }}"></i></button>
                     </td>
                 </tr>
@@ -32,7 +33,6 @@
                 </div>
                 <div class="modal-body">
                     <form id="myForm" name="myForm" class="form-horizontal" novalidate="">
-    
                         <div class="form-group">
                             <label>Titre</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre"
@@ -43,7 +43,7 @@
                         <div class="form-group">
                             <label>Slug</label>
                             <input type="text" class="form-control" id="slug" name="slug"
-                                placeholder="Entrer le slug" value="">
+                                placeholder="Entrer le slug"  value="" >
                                 <span class="text-danger error-text slug_error"></span>
                         </div>
                     </form>
@@ -54,9 +54,43 @@
                 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn-save" value="add">Save changes
+                    <button type="button" class="btn btn-primary" id="btn-save" value="">Enregistrer
                     </button>
-                    <input type="hidden" id="todo_id" name="todo_id" value="0">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="formModalBlock" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="formModalBlockLabel">Créer un nouveau block</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="myFormBlock" name="myFormBlock" class="form-horizontal" novalidate="">
+                        <div class="form-group">
+                            <label>Titre</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Entrer le titre"
+                                value="">
+                            <span class="text-danger error-text title_error"></span>
+                        </div>
+    
+                        <div class="form-group">
+                            <label>Slug</label>
+                            <input type="text" class="form-control" id="slug" name="slug" placeholder="Entrer le slug"
+                                value="">
+                            <span class="text-danger error-text slug_error"></span>
+                        </div>
+                    </form>
+    
+                    <div class="errors">
+    
+                    </div>
+    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-save" value="">Enregistrer
+                    </button>
                 </div>
             </div>
         </div>

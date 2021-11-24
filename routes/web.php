@@ -43,19 +43,24 @@ Route::group(['middleware' => 'admin',], function() {
     Route::post('/admin/user/save', 'Back\UserController@save')->name('admin.user.save');
     /**page admin */
     Route::get('/admin/page/list', 'Back\PageController@index')->name('admin.page.list');
-    Route::get('/admin/page/content', 'Back\PageController@listContent/{id}')->name('admin.page.list.content');
+    Route::get('/admin/page/{id}/content', 'Back\PageController@listContent')->name('admin.page.list.content');
     Route::post('/admin/page/new', 'Back\PageController@new')->name('admin.page.new');
+    Route::post('/admin/page/{id}/content/new', 'Back\PageController@newBlock')->name('admin.page.content.new');
     Route::get('/admin/page/edit/{id}', array(
         'as' => 'admin.page.edit',
         'uses' => 'Back\PageController@edit'
     ));
-    Route::get('/admin/page/delete/{id}', array(
-        'as' => 'admin.page.delete',
-        'uses' => 'Back\PageController@delete'
+    Route::get('/admin/page/{id}/content/edit/{bloc_id}', array(
+        'as' => 'admin.page.content.edit',
+        'uses' => 'Back\PageController@editContent'
     ));
     Route::delete('/admin/page/delete/{id}', array(
         'as' => 'admin.page.delete',
         'uses' => 'Back\PageController@delete'
+    ));
+   Route::delete('/admin/page/{id}/delete/content/{bloc_id}', array(
+        'as' => 'admin.page.content.delete',
+        'uses' => 'Back\PageController@deleteContent'
     ));
 });
 /**fin de page */

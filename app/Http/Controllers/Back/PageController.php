@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Back;
 
+use Response;
 use DataTables;
 use App\Models\Page;
+use App\Models\Content;
 use Illuminate\Http\Request;
-use Response;
 use App\Http\Controllers\Controller;
 
 class PageController extends Controller
@@ -75,7 +76,55 @@ class PageController extends Controller
 
     public function listContent($id = false){
         $page = Page::find($id);
-        $contents = $page->contents();
-        var_dump($contents);
+        $contents = $page->contents;
+        return view('back.page.content',compact('contents','page'));
+    }
+
+    public function newBlock(Request $request){
+        $messages = [
+          'required' => 'Ce champ est obligatoire',
+          'unique'    => 'Ce nom est dèjà pris dans la base',
+        ];
+        
+        if(isset($request->bloc_id) && !is_null($request->bloc_id)){
+            $content = Content::find($request->bloc_id);
+            $data= $request->validate([
+                'bloc_name'=>'required',
+                'content'=>'required',
+            ], $messages);
+            $content->bloc_name = $request->bloc_name;
+            $content->content = $request->content;
+            $content->save();
+        }
+        else{
+            $data= $request->validate([
+                'bloc_name'=>'required',
+                'content'=>'required',
+            ], $messages);  
+            $data['page_id']= $request->page_id;   
+            $content = Content::create($data);
+        }
+        return response()->json($content);
+    }
+
+    public function editContent($id,$bloc_id)
+    {
+        
+        $content_edit = Content::find($bloc_id);
+    
+        return response()->json($content_edit);
+    }
+
+      /**
+     *  delete page
+     * @return View
+     */
+    public function deleteContent($id,$bloc_id)
+    {
+
+        $content = Content::find($bloc_id);
+        $content->delete();
+        return response()->json(['success'=>'Bloc effacé avec succès.']);
+        
     }
 }

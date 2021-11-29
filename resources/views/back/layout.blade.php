@@ -60,6 +60,14 @@
           </li>
         </ul>
       </li>
+      <li>
+        <a href="#photoSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Photos</a>
+        <ul class="collapse list-unstyled" id="photoSubmenu">
+          <li>
+            <a href="{{url('/admin/category/list')}}">Gestion des catégories</a>
+          </li>
+        </ul>
+      </li>
       @endif
       <li>
         <a href="#">Portfolio</a>

@@ -62,8 +62,12 @@ Route::group(['middleware' => 'admin',], function() {
         'as' => 'admin.page.content.delete',
         'uses' => 'Back\PageController@deleteContent'
     ));
+    /**fin de page */
+    Route::get('/admin/category/list','Back\CategoryController@index')->name('admin.category.list');
+    Route::post('/admin/category/new','Back\CategoryController@new')->name('admin.category.new');
+    Route::delete('/admin/category/delete','Back\CategoryController@delete')->name('admin.category.delete');
+    Route::get('/admin/category/edit/{id}','Back\CategoryController@edit')->name('admin.category.edit');
 });
-/**fin de page */
 /**
 * Page accéssible aux utilisateurs authentifié
  */

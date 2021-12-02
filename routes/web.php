@@ -63,10 +63,20 @@ Route::group(['middleware' => 'admin',], function() {
         'uses' => 'Back\PageController@deleteContent'
     ));
     /**fin de page */
+    /** Categoruy */
     Route::get('/admin/category/list','Back\CategoryController@index')->name('admin.category.list');
     Route::post('/admin/category/new','Back\CategoryController@new')->name('admin.category.new');
-    Route::delete('/admin/category/delete','Back\CategoryController@delete')->name('admin.category.delete');
+    Route::delete('/admin/category/delete/{id}','Back\CategoryController@delete')->name('admin.category.delete');
     Route::get('/admin/category/edit/{id}','Back\CategoryController@edit')->name('admin.category.edit');
+    /** fin category */
+    /***Photo */
+     Route::get('/admin/photo/list','Back\PhotoController@index')->name('admin.photo.list');
+     Route::post('/admin/photo/new','Back\PhotoController@new')->name('admin.photo.new');
+     Route::delete('/admin/photo/delete/{id}','Back\PhotoController@delete')->name('admin.photo.delete');
+     Route::get('/admin/photo/edit/{id}','Back\PhotoController@edit')->name('admin.photo.delete');
+     /*fin photo*/
+
+
 });
 /**
 * Page accéssible aux utilisateurs authentifié

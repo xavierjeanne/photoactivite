@@ -64,17 +64,16 @@
 
 @endsection
 
-@section('script')
+@section('scripts')
 <script type="text/javascript">
-    jQuery(document).ready(function($) {
-    
+   
     /*** GESTION DES categories ***/
     
     //----- Open model CREATE -----//
     jQuery('#btn-add').click(function() {
         jQuery('#btn-save').val("add");
         jQuery('#myForm').trigger("reset");
-        jQuery('#formModalLabel').text('Créer une nouvelle category');
+        jQuery('#formModalLabel').text('Créer une nouvelle categorie');
         jQuery('#formModal').modal('show');
     });
     // open modal for edit category //
@@ -141,6 +140,7 @@
                 $('.error').html(''); 
                 $.each(xhr.responseJSON.errors,
                 function(key, value) { 
+                console.log(key);
                     $('.' + key + '_error' ).append('<div class="alert alert-danger">' + value + '</div');
                 }); 
             } 
@@ -169,6 +169,6 @@
             }); 
         } 
     });
- });
+
 </script>
 @endsection

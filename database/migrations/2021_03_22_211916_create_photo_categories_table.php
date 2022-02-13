@@ -13,7 +13,7 @@ class CreatePhotoCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('photo_categories', function (Blueprint $table) {
+        Schema::create('category_photo', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('photo_id')->unsigned()->index();
             $table->integer('category_id')->unsigned()->index();
@@ -36,6 +36,6 @@ class CreatePhotoCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('photo_categories');
+        Schema::dropIfExists('category_photo');
     }
 }

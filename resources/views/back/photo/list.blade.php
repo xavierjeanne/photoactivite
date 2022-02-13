@@ -34,8 +34,14 @@
         <tbody>
             @foreach($photos as $photo)
             <tr id="photo-{{$photo->id}}">
-                <td>{{$photo->name}}</td>
-                <td>{{$photo->categories}}</td>
+                <td><img src="{{public_path()}}/images/photos/{{$photo->name}}{{$photo->extension}}" alt=""></td>
+                <td>
+                    <ul>
+                    @foreach  ($photo->categories as $cat)
+                        <li>{{$cat->name}}</li>
+                    @endforeach
+                    </ul>
+                </td>
                 <td><button class="btn-edit" data-id="{{$photo->id}}"><i class="fa fa-pen" title="{{ __(" Éditer")
                             }}"></i></button>
                     <button class="btn-suppr" data-id="{{$photo->id}}"><i class="fa fa-trash" title="{{ __("

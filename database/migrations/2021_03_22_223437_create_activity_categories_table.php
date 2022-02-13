@@ -17,7 +17,7 @@ class CreateActivityCategoriesTable extends Migration
             $table->increments('id')->unsigned();
             $table->integer('category_photo_id')->unsigned()->index();
             $table->foreign('category_photo_id')->references('id')
-                ->on('photo_categories')
+                ->on('category_photo')
                 ->onDelete('restrict')
                 ->onUpdate('restrict');
             $table->integer('activity_id')->unsigned()->index();

@@ -47,28 +47,35 @@ class PhotoController extends Controller
                 foreach($categories as $category){
                     $listCategory[$category->id] = strtolower($category->code);
                 }
-                foreach($request->file('photos') as $photo)
+                foreach($request->file('photos') as $file)
                 {
-                    $filename = $photo->getClientOriginalName();
+                    $filename = $file->getClientOriginalName();
                     $params = explode('-',$filename);
                     $photo =new Photo();
-                    $photo->name = $params[0];
-                    $photo->extension = end($params);
+                    $name = trim($params[0]);
+                    $photo->name=str_replace(' ', '',$name);
+                    $photo->extension = trim(end($params));
+                    $imageName = $photo->name.$photo->extension;
+                    $file->move(public_path().'/images/photos/', $imageName);
+                    $photo->save();
                     $categoryPhoto = [];
                     foreach($params as $param){
                         $param=strtolower(trim($param));
                         $search=array_search($param, $listCategory);
                         if($search){
                             $categoryPhoto[] = $search;
+                        
                         }
+                    }
+                    foreach($categoryPhoto as $catPhoto){
+                        $photo->categories()->attach($catPhoto);
                     }
                     // save the photo first then save photos_category with the categoryPhoto list define before
                     // 
                 }
-                die();
             }
         }
-        return response()->json($photo);
+        return response()->json();
     }
 
     /**

@@ -23,7 +23,7 @@ class Category extends Model
         return $this->belongsToMany('App\Models\User');
     }
 
-    public function categories(){
-        return $this->belongsToMany('App\Models\Category');
+    public function photos(){
+        return $this->belongsToMany('App\Models\Photo');
     }
 }

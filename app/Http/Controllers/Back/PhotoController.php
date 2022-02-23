@@ -11,10 +11,11 @@ use App\Http\Controllers\Controller;
 class PhotoController extends Controller
 {
     //
-     public function index(Request $request){
-        $photos = Photo::all();
+    public function index($name = null){
+        $query = $name ? Category::where('name',$name)->firstOrFail()->photos() : Photo::query();
+        $photos = $query->oldest('name')->paginate(5);
         $categories = Category::orderBy('name')->get();
-        return view('back.photo.list',compact('photos','categories'));
+        return view('back.photo.list', compact('photos', 'categories', 'name'));
     }
 
 /**
@@ -68,14 +69,12 @@ class PhotoController extends Controller
                         }
                     }
                     foreach($categoryPhoto as $catPhoto){
-                        $photo->categories()->attach($catPhoto);
-                    }
-                    // save the photo first then save photos_category with the categoryPhoto list define before
-                    // 
+                        $photo->categories()->sync($catPhoto);
+                    } 
                 }
             }
         }
-        return response()->json();
+        return back();
     }
 
     /**
@@ -99,8 +98,11 @@ class PhotoController extends Controller
     {
 
         $photo = Photo::find($id);
+        $imageName = $photo->name.$photo->extension;
+        unlink(public_path().'/images/photos/'. $imageName);
+        $photo->categories()->detach();
         $photo->delete();
-        return response()->json(['success'=>'Photo effacée avec succès.']);
+        return back()->with('info', 'Le film a bien été supprimé dans la base de données.');
         
     }
 }

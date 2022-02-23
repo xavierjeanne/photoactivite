@@ -1,6 +1,11 @@
 @extends('back.layout')
 @section('content')
 <div class="container">
+    @if(session()->has('info'))
+    <div class="notification is-success">
+        {{ session('info') }}
+    </div>
+    @endif
     <h1>liste des photos</h1>
     <form method="POST" enctype="multipart/form-data" id="upload_image_form" action="javascript:void(0)">
         <div class="row">
@@ -17,10 +22,11 @@
             </div>
         </div>
     </form>
-
-    <select name="category" id="categorie">
-        @foreach ($categories as $categorie)
-            <option value="{{$categorie->code}}">{{$categorie->name}}</option>
+    <select onchange="window.location.href = this.value">
+        <option value="{{ route('admin.photo.list') }}" @unless($name) selected @endunless>Toutes catégories</option>
+        @foreach($categories as $category)
+        <option value="{{ route('admin.photo.category', $category->name) }}" {{ $name==$category->name ? 'selected' : '' }}>{{
+            $category->name }}</option>
         @endforeach
     </select>
     <table class="table" id="photos-list" name="photos-list">
@@ -34,7 +40,7 @@
         <tbody>
             @foreach($photos as $photo)
             <tr id="photo-{{$photo->id}}">
-                <td><img src="{{public_path()}}/images/photos/{{$photo->name}}{{$photo->extension}}" alt=""></td>
+                <td><img src="{{ asset('/images/photos/'.$photo->name.$photo->extension)}}" alt="" width="150"></td>
                 <td>
                     <ul>
                     @foreach  ($photo->categories as $cat)
@@ -44,9 +50,13 @@
                 </td>
                 <td><button class="btn-edit" data-id="{{$photo->id}}"><i class="fa fa-pen" title="{{ __(" Éditer")
                             }}"></i></button>
-                    <button class="btn-suppr" data-id="{{$photo->id}}"><i class="fa fa-trash" title="{{ __("
-                            Supprimer") }}"></i></button>
+                    
                 </td>
+                <td><form action="{{ route('admin.photo.delete', $photo->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="button is-danger" type="submit">Supprimer</button>
+                </form></td>
             </tr>
             @endforeach
         </tbody>

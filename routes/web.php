@@ -68,12 +68,13 @@ Route::group(['middleware' => 'admin',], function() {
     Route::post('/admin/category/new','Back\CategoryController@new')->name('admin.category.new');
     Route::delete('/admin/category/delete/{id}','Back\CategoryController@delete')->name('admin.category.delete');
     Route::get('/admin/category/edit/{id}','Back\CategoryController@edit')->name('admin.category.edit');
+    Route::get('/admin/category/{name}/photos', 'Back\PhotoController@index')->name('admin.photo.category');
     /** fin category */
     /***Photo */
      Route::get('/admin/photo/list','Back\PhotoController@index')->name('admin.photo.list');
      Route::post('/admin/photo/new','Back\PhotoController@new')->name('admin.photo.new');
      Route::delete('/admin/photo/delete/{id}','Back\PhotoController@delete')->name('admin.photo.delete');
-     Route::get('/admin/photo/edit/{id}','Back\PhotoController@edit')->name('admin.photo.delete');
+     Route::get('/admin/photo/edit/{id}','Back\PhotoController@edit')->name('admin.photo.edit');
      /*fin photo*/
 
 
